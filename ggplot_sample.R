@@ -38,4 +38,32 @@ myplot.diamond <- ggplot() +
 myplot.diamond
 
 library(MASS)
-ggplot(birthwt, aes(factor(race), bwt)) + geom_boxplot()
+myplot <- ggplot(birthwt, aes(factor(race), bwt)) + geom_boxplot()
+myplot
+
+myplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + geom_point(size = 3)
+myplot
+
+myplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + geom_point(size = 3) +
+  facet_grid(. ~ Species)
+myplot
+
+myplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + geom_point(size = 3) +
+  facet_grid(Species ~ .)
+myplot
+ 
+# not working
+myplot <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + geom_point(size = 3) +
+  facet_wrap(Species ~ .)
+myplot
+
+
+library(RColorBrewer)
+display.brewer.all()
+
+
+df <- melt(iris, id.var = "Species")
+ggplot(df, aes(Species, value, fill = variable)) + 
+  geom_bar(stat = "identity", position = "dodge") + scale_fill_brewer(palette = "Set1")
+
+
