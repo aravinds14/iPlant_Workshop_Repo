@@ -22,10 +22,19 @@ plot(cars)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 ```{r}
+install.packages("ggplot2",dependencies = TRUE)
+install.packages("plyr")
+install.packages("ggthemes")
+install.packages("reshape2")
+library("ggplot2")
+library("reshape2")
+library("ggthemes")
+library("plyr")
+data.in <- read.csv(file = "output/combined_gapMinder.tsv", sep="\t")
+data.selected <- subset(data.in,country == "China" | country == "India" | country =="United States")
 
-data.in <- read.csv(file = "data/clean/India.cc.txt")
-data.in
-
+myplot.selected <- ggplot(data = data.selected, aes(year,gdpPercap, color=country)) + geom_point()
+myplot.selected
 
 
 
